@@ -3,7 +3,9 @@ import env from "dotenv";
 
 env.config();
 
-export const turso = createClient({
+// Conexão com o banco de dados
+
+const turso = createClient({
   url: process.env.TURSO_DATABASE_URL,
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
@@ -16,3 +18,13 @@ const dados = await turso.execute({
 
 console.log(users.rows);
 console.log(dados.rows);
+
+// Sincronização local
+
+const client = createClient({
+  url: "file:./database/local.db",         
+  syncUrl: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
+
+await client.sync();

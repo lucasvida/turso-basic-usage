@@ -1,2 +1,11 @@
 .env
 node_modules
+
+# Sincronização local
+
+local.db
+local.db-journal
+local.db-wal
+local.db-info
+local.db-shm
+database/*
